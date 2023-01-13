@@ -31,7 +31,15 @@ export default class EventService {
      * @return {null | Event}
      */
     getFirstEvent() {
-        return null; //TODO
+        const allEvents = this._eventRepository.getAll();
+        let firstEvent = allEvents[0];
+        allEvents.forEach(event => {
+            if (event.getStartTime() < firstEvent.getStartTime()){
+                firstEvent = event;
+            }
+        });
+
+        return firstEvent; //TODO
     }
 
     /**
@@ -39,7 +47,15 @@ export default class EventService {
      * @return {null | Event}
      */
     getLastEvent() {
-        return null; //TODO
+        const allEvents = this._eventRepository.getAll();
+        let lastEvent = allEvents[0];
+        allEvents.forEach(event => {
+            if (event.getStartTime() > lastEvent.getStartTime()){
+                lastEvent = event;
+            }
+        });
+
+        return lastEvent; //TODO
     }
 
     /**
@@ -47,7 +63,15 @@ export default class EventService {
      * @return {null | Event}
      */
     getLongestEvent() {
-        return null; //TODO
+        const allEvents = this._eventRepository.getAll();
+        let resultEvent = allEvents[0];
+        allEvents.forEach(event => {
+            if ((event.getEndTime() - event.getStartTime()) >= 0 && (resultEvent.getEndTime() - resultEvent.getStartTime()) >= 0 && (event.getEndTime() - event.getStartTime()) > (resultEvent.getEndTime() - resultEvent.getStartTime())){
+                resultEvent = event;
+            }
+        });
+
+        return resultEvent; //TODO
     }
 
     /**
@@ -55,7 +79,15 @@ export default class EventService {
      * @return {null | Event}
      */
     getShortestEvent() {
-        return null; //TODO
+        const allEvents = this._eventRepository.getAll();
+        let resultEvent = allEvents[0];
+        allEvents.forEach(event => {
+            if ((event.getEndTime() - event.getStartTime()) >= 0 && (resultEvent.getEndTime() - resultEvent.getStartTime()) >= 0 && (event.getEndTime() - event.getStartTime()) < (resultEvent.getEndTime() - resultEvent.getStartTime())){
+                resultEvent = event;
+            }
+        });
+
+        return resultEvent; //TODO
     }
 
     // A implementer en TDD
